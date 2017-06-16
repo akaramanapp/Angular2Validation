@@ -1,3 +1,22 @@
-<h1>
-  {{title}}
-</h1>
+<div class="container">
+<form #form="ngForm" (submit)="submitForm(form)" novalidate>
+  <div class="form-group" [class.has-error]="firstName.invalid && firstName.dirty">
+      <label class="control-label">Ad</label>
+      <input #firstName="ngModel" type="text" required minlength="3" maxlength="20" name="firstName" class="form-control" [(ngModel)]="model.firstName">
+      <div *ngIf="firstName.invalid && firstName.dirty" class="alert alert-danger">Ad zorunlu ve en az 3 karakter olmak zorundadır.</div>
+  </div>
+    <div class="form-group" [class.has-error]="lastName.invalid && lastName.touched">
+      <label class="control-label">Soyad</label>
+      <input #lastName="ngModel" type="text" required name="lastName" class="form-control" [(ngModel)]="model.lastName">
+      <div *ngIf="lastName.invalid && lastName.touched" class="alert alert-danger">Soyad boş geçilemez.</div>  
+  </div>
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" name="is-full-time" name="isFullName" [(ngModel)]="model.isFullName">
+    </label>
+  </div>
+  <button type="submit" class="btn btn-success">Kaydet</button>
+</form>
+</div>
+Pristine: {{form.pristine}}
+Valid: {{form.valid}}
